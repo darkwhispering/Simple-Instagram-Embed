@@ -5,13 +5,13 @@ Requires at least: 3.0.0
 Tested up to: 3.5.2
 Stable tag: 1.0.0
 
-Past any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 
 == Description ==
 
 *BETA*
 
-Past any link to a instagram picture or video in your post and the plugin replace your instagram link with the new [Instagram Embed](http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds) directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the new [Instagram Embed](http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds) directly in your posts just like wordpress replace your youtube links to youtube embeds.
 
 Settings page avaliable to select between 3 different sizes to embed.
 

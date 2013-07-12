@@ -2,7 +2,7 @@
 /*
 Plugin Name: Simple Instagram Embed
 Plugin URI: http://darkwhispering.com/wp-plugins/simple-instagram-embed
-Description: Past any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Description: Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 Author: Mattias Hedman
 Author URI: http://www.darkwhispering.com
 Version: 1.0.0
