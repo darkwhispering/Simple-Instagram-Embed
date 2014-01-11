@@ -2,8 +2,8 @@
 Contributors: darkwhispering
 Tags: social, plugin, instagram, embed, instagram embed, image, video
 Requires at least: 3.0.0
-Tested up to: 3.6.1
-Stable tag: 1.2.0
+Tested up to: 3.8.0
+Stable tag: 1.2.1
 
 Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 
@@ -34,6 +34,10 @@ Yeah, so would I. Sadly, this is a behavior I can not control and it is up to In
 3. Plugin settings, select embed size
 
 == Changelog ==
+
+= 1.2.1 =
+* Fixed issue with image urls containing a dash not beeing embeded properly
+* Tested on WP 3.8.0
 
 = 1.2.0 =
 * Changed method to add the embed. Plugin now use wordpress wp_embed_register_handler insteada of a add_filter on the_content
