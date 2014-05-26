@@ -2,7 +2,7 @@
 Contributors: darkwhispering
 Tags: social, plugin, instagram, embed, instagram embed, image, video
 Requires at least: 3.0.0
-Tested up to: 3.8.0
+Tested up to: 3.9.1
 Stable tag: 1.2.1
 
 Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
