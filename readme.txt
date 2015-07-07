@@ -2,20 +2,22 @@
 Contributors: darkwhispering
 Tags: social, plugin, instagram, embed, instagram embed, image, video
 Requires at least: 3.0.0
-Tested up to: 4.1.1
-Stable tag: 1.2.1
+Tested up to: 4.2.2
+Stable tag: 1.3.0
 
-Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the NEW Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 
 == Description ==
 
-Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the new [Instagram Embed](http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds) directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the [Instagram Embed](http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds) directly in your posts just like wordpress replace your youtube links to youtube embeds.
 
-Settings page avaliable to select between 3 different sizes to embed.
+Settings page avaliable to select between 3 different sizes to embed and if image/video caption should be included.
 
 If you find any issues, please report them in the support section so they can be addressed. Thank you!
 
 More info about the new Intagram Embed: http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds
+
+Plugin also available on [Github](https://github.com/darkwhispering/Simple-Instagram-Embed)
 
 == Installation ==
 
@@ -34,6 +36,12 @@ Yeah, so would I. Sadly, this is a behavior I can not control and it is up to In
 3. Plugin settings, select embed size
 
 == Changelog ==
+
+= 1.3.0 =
+* Added settings option to include/exlude image/video caption in embed. Please be aware that long captions might push down below the hight of the embed iframe and by so activate scroll inside the iframe.
+* Tested on Wordpress 4.2.2.
+* Small update to the different size dimensions to allow for at least one row of caption.
+* Updated code to better follow the Wordpress coding guidelines.
 
 = 1.2.1 =
 * Fixed issue with image urls containing a dash not beeing embeded properly
