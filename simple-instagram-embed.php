@@ -5,125 +5,203 @@ Plugin URI: http://darkwhispering.com/wp-plugins/simple-instagram-embed
 Description: Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 Author: Mattias Hedman
 Author URI: http://www.darkwhispering.com
-Version: 1.3.0
+Version: 2.0.0
 */
 
-wp_embed_register_handler( 'simple_instagram_embed', '/https?\:\/\/instagram.com\/p\/(.+)/', 'simple_instagram_embed_handler' );
+// Initiate class
+$Simple_Instagram_Embed = new Simple_Instagram_Embed;
 
-function simple_instagram_embed_handler( $matches, $attr, $url, $rawattr )
+// Register settings page and fields
+add_action( 'admin_init', array( $Simple_Instagram_Embed, 'settings' ) );
+add_action( 'admin_menu', array( $Simple_Instagram_Embed, 'menu' ) );
+
+// Register embed
+wp_embed_register_handler(
+    'simple_instagram_embed',
+    '/https?\:\/\/(?:www.)?instagram.com\/p\/(.+)/',
+    array( $Simple_Instagram_Embed, 'embed' )
+);
+
+Class Simple_Instagram_Embed
 {
-    $size = get_option( 'insta_embed_size' );
-    $caption = get_option( 'insta_embed_caption' );
 
-    switch( $size )
+    /**
+     * Add plugin settings page
+     */
+    function menu()
     {
-        case 'large':
-            $iframe_size = 'width="612" height="720"';
-            break;
-
-        case 'middle':
-            $iframe_size = 'width="480" height="600"';
-            break;
-
-        case 'small':
-            $iframe_size = 'width="350" height="470"';
-            break;
-
-        default:
-            $iframe_size = 'width="612" height="720"';
-            break;
+        add_options_page(
+            __( 'Simple Instagram Embed Settings', 'simple_instagram_embed' ),
+            __( 'Simple Instagram Embed', 'simple_instagram_embed' ),
+            'manage_options',
+            'insta-settings',
+            array( $this, 'settings_page' )
+        );
     }
 
-    $image_id = str_replace( '/', '', $matches[1] );
+    /**
+     * Add plugin settings page fields
+     */
+    function settings()
+    {
+        // Add settings section
+        add_settings_section(
+            'insta_embed_settings_section',
+            '',
+            array( $this, 'settings_section_callback' ),
+            'insta_embed_settings_group'
+        );
 
-    $embed = sprintf(
-        '<iframe src="//instagram.com/p/%1$s/embed/' . $caption . '?v=4" ' . $iframe_size . ' frameborder="0" scrolling="auto" allowtransparency="true" class="simple-instagram-embed instagram-embed"></iframe>',
-        esc_attr( $image_id )
-    );
+        // Add settings field and register it
+        add_settings_field(
+            'insta_embed_size',
+            __( 'Embed max width', 'simple_instagram_embed' ),
+            array( $this, 'settings_insta_embed_size_callback' ),
+            'insta_embed_settings_group',
+            'insta_embed_settings_section'
+        );
+        register_setting( 'insta_embed_settings_group', 'insta_embed_size' );
 
-    return apply_filters( 'simple_instagram_embed', $embed, $matches, $attr, $url, $rawattr );
-}
+        // Add settings field and register it
+        add_settings_field(
+            'insta_embed_caption',
+            __( 'Hide image caption', 'simple_instagram_embed' ),
+            array( $this, 'settings_insta_embed_caption_callback' ),
+            'insta_embed_settings_group',
+            'insta_embed_settings_section'
+        );
+        register_setting( 'insta_embed_settings_group', 'insta_embed_caption' );
+    }
 
+    /**
+     * Has to exists, but we don't use it...
+     *
+     * @return  [type]  [description]
+     */
+    function settings_section_callback()
+    {
+        // We don't want to do anything here atm...
+    }
 
-function insta_embed_settings()
-{
+    /**
+     * Callback function that renders size settings field
+     */
+    function settings_insta_embed_size_callback()
+    {
+        // Get current value, or set 600 as default
+        $size = get_option( 'insta_embed_size', 600 );
+
+        // Convert old plugin string values to int
+        switch( $size ) {
+            case 'large':
+                $size = 612;
+                break;
+
+            case 'middle':
+                $size = 480;
+                break;
+
+            case 'small':
+                $size = 320;
+                break;
+        }
+
+        // Create HTML code
+        $html = '<input name="insta_embed_size" id="insta_embed_size" type="number" value="' . $size . '" />';
+        $html .= '<p class="description">'. __( 'There is no height setting because the height will adjust automatically based on the width.', 'simple_instagram_embed' ) .'</p>';
+
+        // Echo HTML code
+        echo $html;
+    }
+
+    /**
+     * Callback function that renders caption settings field
+     */
+    function settings_insta_embed_caption_callback()
+    {
+        // Create HTML code
+        $html = '<input name="insta_embed_caption" id="insta_embed_caption" type="checkbox" value="1" ' . checked( 1, get_option( 'insta_embed_caption' ), false ) . ' />';
+
+        // Echo HTML code
+        echo $html;
+    }
+
+    /**
+     * Render settings page
+     */
+    function settings_page()
+    {
+        // Check so user has correct permissions
         if ( ! current_user_can( 'manage_options' ) )
         {
             wp_die( __( 'You do not have sufficient permissions to access this page.', 'simple_instagram_embed' ) );
         }
 
-        $size = get_option( 'insta_embed_size' );
-        $caption = get_option( 'insta_embed_caption' );
+        ?>
 
-        switch( $size ) {
-            case 'large':
-                $large = 'selected="selected"';
-                break;
-
-            case 'middle':
-                $middle = 'selected="selected"';
-                break;
-
-            case 'small':
-                $small = 'selected="selected"';
-                break;
-
-            default:
-                $large = 'selected="selected"';
-                break;
-        }
-    ?>
         <div class="wrap insta-settings">
-            <h2><?php _e( 'Simple Instagram Embed Settings', 'simple_instagram_embed' ); ?></h2>
+
+            <h1><?php _e( 'Simple Instagram Embed Settings', 'simple_instagram_embed' ); ?></h1>
 
             <form method="post" action="options.php">
-                <?php wp_nonce_field( 'update-options' ); ?>
-
-                <table class="form-table insta-settings-table">
-                    <tbody>
-                        <tr valign="top">
-                            <th scope="row">
-                                <strong><?php _e( 'Choose embed size:', 'simple_instagram_embed' ); ?></strong>
-                            </th>
-                            <td>
-                                <select name="insta_embed_size">
-                                    <option value="large" <?php echo $large; ?>>
-                                        <?php _e( 'Large (w:612 x h:720 pixels)', 'simple_instagram_embed' ); ?>
-                                    </option>
-                                    <option value="middle" <?php echo $middle; ?>>
-                                        <?php _e( 'Middle (w:480 x h:600 pixels)', 'simple_instagram_embed' ); ?>
-                                    </option>
-                                    <option value="small" <?php echo $small; ?>>
-                                        <?php _e( 'Small (w:350 x h:470 pixels)', 'simple_instagram_embed' ); ?>
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr valign="top">
-                            <th scope="row">
-                                <?php _e( 'Include caption', 'simple_instagram_embed'); ?>
-                            </th>
-                            <td>
-                                <label for="insta_embed_caption">
-                                    <input type="checkbox" id="insta_embed_caption" name="insta_embed_caption" value="captioned" <?php echo !empty( $caption ) ? 'checked="checked"' : '' ?> />
-                                </label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <input type="hidden" name="action" value="update" />
-                <input type="hidden" name="page_options" value="insta_embed_size, insta_embed_caption" />
-                <input type="submit" name="submit" value="<?php _e( 'Save', 'simple_instagram_embed' ); ?>" class="button-primary save" />
+            <?php
+                // Print out all needed fields and submit button.
+                settings_fields( 'insta_embed_settings_group' );
+                do_settings_sections( 'insta_embed_settings_group' );
+                submit_button();
+            ?>
             </form>
 
         </div>
-    <?php
+
+        <?php
     }
 
+    /**
+     * Embed code
+     */
+    function embed( $matches, $attr, $url, $rawattr )
+    {
+        $size         = get_option( 'insta_embed_size' );
+        $hide_caption = get_option( 'insta_embed_caption' );
+        $image_id     = str_replace( '/', '', $matches[1] );
+        $embed        = $this->get_embed_code( $image_id, $size, $hide_caption );
 
-function insta_embed_menu()
-{
-    add_submenu_page( 'options-general.php', 'Simple Instagram Embed Settings', 'Simple Instagram Embed', 'manage_options', 'insta-settings', 'insta_embed_settings' );
+        return apply_filters( 'simple_instagram_embed', $embed, $matches, $attr, $url, $rawattr );
+    }
+
+    /**
+     * Get embed code from Instagram
+     *
+     * @param   string   $image_id      Image ID on Instagram
+     * @param   integer  $size          Size (width) in pixels
+     * @param   boolean  $hide_caption  Should caption be hidden
+     *
+     * @return  html                    Returns embed HTML code
+     */
+    function get_embed_code( $image_id = null, $size = 600, $hide_caption = false )
+    {
+        $curl = curl_init();
+
+        curl_setopt_array(
+            $curl,
+            array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL            => 'https://instagram.com/publicapi/oembed/?url=https://instagr.am/p/' . $image_id . '&maxwidth=' . $size . '&hidecaption=' . $hide_caption,
+                CURLOPT_USERAGENT      => 'Simple Instagram Embed Wordpress Plugin'
+            )
+        );
+
+        $result = json_decode( curl_exec( $curl ) );
+        $http_status = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
+
+        curl_close( $curl );
+
+        if ( $http_status === 200 )
+        {
+            return $result->html;
+        }
+
+        return '';
+    }
 }
-add_action( 'admin_menu', 'insta_embed_menu' );
