@@ -5,7 +5,7 @@ Plugin URI: http://darkwhispering.com/wp-plugins/simple-instagram-embed
 Description: Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 Author: Mattias Hedman
 Author URI: http://www.darkwhispering.com
-Version: 2.0.0
+Version: 2.1.0
 */
 
 // Initiate class
@@ -108,7 +108,7 @@ Class Simple_Instagram_Embed
 
         // Create HTML code
         $html = '<input name="insta_embed_size" id="insta_embed_size" type="number" value="' . $size . '" />';
-        $html .= '<p class="description">'. __( 'There is no height setting because the height will adjust automatically based on the width.', 'simple_instagram_embed' ) .'</p>';
+        $html .= '<p class="description">'. __( 'There is no height setting because the height will adjust automatically based on the width. <br/> Instagram only allow a minimum width of 320 pixels. Using a lower value will break the embed.', 'simple_instagram_embed' ) .'</p>';
 
         // Echo HTML code
         echo $html;
@@ -187,7 +187,7 @@ Class Simple_Instagram_Embed
             $curl,
             array(
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL            => 'https://instagram.com/publicapi/oembed/?url=https://instagr.am/p/' . $image_id . '&maxwidth=' . $size . '&hidecaption=' . $hide_caption,
+                CURLOPT_URL            => 'https://api.instagram.com/oembed/?url=https://instagr.am/p/' . $image_id . '&maxwidth=' . $size . '&hidecaption=' . $hide_caption,
                 CURLOPT_USERAGENT      => 'Simple Instagram Embed Wordpress Plugin'
             )
         );

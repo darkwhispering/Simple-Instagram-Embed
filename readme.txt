@@ -2,8 +2,8 @@
 Contributors: darkwhispering
 Tags: social, plugin, instagram, embed, instagram embed, image, video, oembed
 Requires at least: 3.0.0
-Tested up to: 4.4.0
-Stable tag: 2.0.0
+Tested up to: 4.4.2
+Stable tag: 2.1.0
 
 Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
 
@@ -39,6 +39,9 @@ Yeah, so would I. Sadly, this is a behavior I can not control and it is up to In
 1. Plugin settings
 
 == Changelog ==
+
+= 2.1.0 =
+* Fixed broken Instagram api URL used in cURL to load embed iframe.
 
 = 2.0.0 =
 * Now using the [Instagram oembed API](https://www.instagram.com/developer/embedding/#oembed) endpoint instead of old fashioned iframe embed.
