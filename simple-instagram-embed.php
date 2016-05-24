@@ -2,10 +2,10 @@
 /*
 Plugin Name: Simple Instagram Embed
 Plugin URI: http://darkwhispering.com/wp-plugins/simple-instagram-embed
-Description: Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Description: Paste any link to a Instagram picture or video in your post and the plugin replace your Instagram link with the Instagram Embed directly in your posts just like Wordpress replace your Youtube links to Youtube embeds.
 Author: Mattias Hedman
 Author URI: http://www.darkwhispering.com
-Version: 2.1.0
+Version: 2.1.1
 */
 
 // Initiate class
@@ -75,8 +75,6 @@ Class Simple_Instagram_Embed
 
     /**
      * Has to exists, but we don't use it...
-     *
-     * @return  [type]  [description]
      */
     function settings_section_callback()
     {
@@ -132,8 +130,7 @@ Class Simple_Instagram_Embed
     function settings_page()
     {
         // Check so user has correct permissions
-        if ( ! current_user_can( 'manage_options' ) )
-        {
+        if ( ! current_user_can( 'manage_options' ) ) {
             wp_die( __( 'You do not have sufficient permissions to access this page.', 'simple_instagram_embed' ) );
         }
 
@@ -197,8 +194,7 @@ Class Simple_Instagram_Embed
 
         curl_close( $curl );
 
-        if ( $http_status === 200 )
-        {
+        if ( $http_status === 200 ) {
             return $result->html;
         }
 

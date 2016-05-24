@@ -2,16 +2,16 @@
 Contributors: darkwhispering
 Tags: social, plugin, instagram, embed, instagram embed, image, video, oembed
 Requires at least: 3.0.0
-Tested up to: 4.4.2
-Stable tag: 2.1.0
+Tested up to: 4.5.2
+Stable tag: 2.1.1
 
-Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the Instagram Embed directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Paste any link to a Instagram picture or video in your post and the plugin replace your Instagram link with the Instagram Embed directly in your posts just like Wordpress replace your Youtube links to Youtube embeds.
 
 == Description ==
 
-Paste any link to a instagram picture or video in your post and the plugin replace your instagram link with the [Instagram Embed](http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds) directly in your posts just like wordpress replace your youtube links to youtube embeds.
+Paste any link to a Instagram picture or video in your post and the plugin replace your Instagram link with the [Instagram Embed](http://blog.instagram.com/post/55095847329/introducing-instagram-web-embeds) directly in your posts just like Wordpress replace your Youtube links to Youtube embeds.
 
-Settings page avaliable where you can specify the maximum width the embed is allowed to be, and hide the caption if you would like that.
+Settings page available where you can specify the maximum width the embed is allowed to be, and hide the caption if you would like that.
 If you site is responsive, the embed will resize down nicely on tablet and mobile devices.
 
 If you find any issues, please report them in the support section so they can be addressed. Thank you!
@@ -25,6 +25,9 @@ Plugin also available on [Github](https://github.com/darkwhispering/Simple-Insta
 
 == Frequently Asked Questions ==
 
+= Why use this plugin when Wordpress now have built in support for Instagram embed =
+It is correct that Wordpress now have built in support for the Instagram embed. What you don't have is control over the site of the embed and if the image/video caption should be included or not. You can control both of these aspects with this plugin in the settings page.
+
 = Image/video is not showing =
 You can only embed images/videos from public profiles. Images from private profiles will not display. So make sure the image you are trying to embed belongs to a user with a public profile.
 
@@ -32,13 +35,18 @@ You can only embed images/videos from public profiles. Images from private profi
 Unfortunately Instagram does not provide any option to hide likes and comments from the embed.
 
 = I want the link in the embed to open in a new tab/window =
-Yeah, so would I. Sadly, this is a behavior I can not control and it is up to Instagram to change this. Imo you should always open external links in new tabs, so I don't understand why Instagram have choosen not to with there embed.
+Yeah, so would I. Sadly, this is a behavior I can not control and it is up to Instagram to change this. Imo you should always open external links in new tabs, so I don't understand why Instagram have choose not to with there embed.
 
 == Screenshots ==
 
 1. Plugin settings
 
 == Changelog ==
+
+= 2.1.1 =
+* Minor code formatting fixes
+* Minor changes to readme
+* Tested on Wordpress 4.5.2
 
 = 2.1.0 =
 * Fixed broken Instagram api URL used in cURL to load embed iframe.
