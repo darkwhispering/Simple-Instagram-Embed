@@ -1,8 +1,9 @@
 === Simple Instagram Embed ===
 Contributors: darkwhispering
+Donate link: http://darkwhispering.com/buy-me-a-beer
 Tags: social, plugin, instagram, embed, instagram embed, image, video, oembed
 Requires at least: 3.0.0
-Tested up to: 4.5.2
+Tested up to: 4.6.0
 Stable tag: 2.1.1
 
 Paste any link to a Instagram picture or video in your post and the plugin replace your Instagram link with the Instagram Embed directly in your posts just like Wordpress replace your Youtube links to Youtube embeds.
