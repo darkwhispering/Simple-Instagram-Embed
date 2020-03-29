@@ -1,3 +1,5 @@
+!!!! Not maintained !!!!
+
 === Simple Instagram Embed ===
 Contributors: darkwhispering
 Donate link: http://darkwhispering.com/buy-me-a-beer
